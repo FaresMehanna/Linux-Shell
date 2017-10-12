@@ -17,11 +17,6 @@
 typedef enum{_dir_SUCC, _dir_MEMERR, _dir_NFOUND, _dir_ERR} _dir_state;
 
 
-struct directoryData{
-	struct string* currDir;
-}directoryData;
-
-
 
  /** 
  * Function: getCurrDir
