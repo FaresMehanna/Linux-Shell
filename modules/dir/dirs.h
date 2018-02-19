@@ -23,7 +23,7 @@ typedef enum{_dir_SUCC, _dir_MEMERR, _dir_NFOUND, _dir_ERR} _dir_state;
  * ---------------
  * return sMalloced string of the current directory.
  */
-static inline char* getCurrDir();
+char* getCurrDir();
 
 
  #endif

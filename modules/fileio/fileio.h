@@ -8,10 +8,6 @@
 #ifndef _FILEIO_MODULE_
 #define _FILEIO_MODULE_
 
-#include <stdio.h>
-#include "../textio/textio.h"
-
-
 /** 
  * Type: _file_io_state
  * ---------------
@@ -33,7 +29,7 @@ struct fileDate{
  * file => pointer to fileDate struct.
  * line => pointer to char* which will be pointing to the line.
  */
-static inline _file_io_state readFile(struct fileDate* file, char** line);
+_file_io_state readFile(struct fileDate* file, char** line);
 
  /** 
  * Function: setFile
@@ -43,7 +39,7 @@ static inline _file_io_state readFile(struct fileDate* file, char** line);
  * file => pointer to fileDate struct.
  * destination => path to wanted file to be read.
  */
-static inline _file_io_state setFile(struct fileDate* file, char* destination);
+_file_io_state setFile(struct fileDate* file, char* destination);
 
  /** 
  * Function: closeFile
@@ -52,6 +48,6 @@ static inline _file_io_state setFile(struct fileDate* file, char* destination);
  *
  * file => pointer to fileDate struct.
  */
-static inline _file_io_state closeFile(struct fileDate* file);
+_file_io_state closeFile(struct fileDate* file);
 
  #endif

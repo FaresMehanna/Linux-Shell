@@ -9,11 +9,6 @@
 #ifndef _CHAINHASH_
 #define _CHAINHASH_
 
-#include "../SingleLinkedList/SingleLinkedList.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h>
 /** 
  * Type: _HashmapChain_state
  * ---------------

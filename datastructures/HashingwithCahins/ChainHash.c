@@ -1,5 +1,3 @@
-#include "ChainHash.h"
-
 static inline unsigned int getHash(void* key, int keysize, long long max){
 	unsigned int hash = 2166136261;
 	for(int i=0;i<keysize;i++){

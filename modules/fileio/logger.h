@@ -8,9 +8,6 @@
 #ifndef _FILEIO_MODULE_LOGGER_
 #define _FILEIO_MODULE_LOGGER_
 
-#include <stdio.h>
-#include <stdlib.h>
-
 /** 
  * Type: _log_io_state
  * ---------------
@@ -23,6 +20,6 @@ typedef enum{_log_io_SUCC, _log_io_FILE_ERR} _log_io_state;
  * ---------------
  * write line to the log file.
  */
-static inline _log_io_state writeToLog(char* line);
+_log_io_state writeToLog(char* line);
 
  #endif

@@ -62,15 +62,21 @@
 #include "modules/sighandlers/sigint.c"
 
 static inline int initializeP(){
+
 	setSIG();	//signals handlers
+	
 	//initizlize the home Directory
 	char* curr = getenv("HOME");
 	if(curr == NULL)	return 0;
+	
+	//set the curr dir
 	setenv("1ShellHome",cloneStr(curr),1);
+	
 	return 1;
 }
 
 int main(int argc, char* argv[]){
+
 	//initialize the data needed for the session and signals handlers
 	if(!initializeP()){
  		printToUser("MAIN","FAILED IN INITIALIZING SHELL",_shell_io_msg_state_ERROR,0,0);
@@ -78,8 +84,12 @@ int main(int argc, char* argv[]){
 	}
 
 	//choose between interactive mode and batch mode based on number of arguments given.
-    if(argc == 1)   startInteractiveMode();
-    else if(argc == 2)  startBatchMode(argv[1]);
-    else    printToUser("MAIN","NUM OF ARGUMENT IS INCORRECT",_shell_io_msg_state_ERROR,0,0);
+    if(argc == 1)
+    	startInteractiveMode();
+    else if(argc == 2)
+    	startBatchMode(argv[1]);
+    else
+    	printToUser("MAIN","NUM OF ARGUMENT IS INCORRECT",_shell_io_msg_state_ERROR,0,0);
+    
     return 0;
 }

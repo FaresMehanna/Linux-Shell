@@ -10,11 +10,6 @@
  */
 #ifndef _singlelinkedlist_
 #define _singlelinkedlist_
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h>
  
 /** 
  * Type: __SlinkedList_state

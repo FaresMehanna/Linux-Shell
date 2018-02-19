@@ -8,15 +8,6 @@
 #ifndef _SHELLIO_MODULE_
 #define _SHELLIO_MODULE_
 
-#include "../fileio/fileio.h"
-#include "../textio/textio.h"
-#include "../textio/string.h"
-#include "../shellio/shellio.h"
-#include "../memorymanger/memmange.h"
-#include "../../datastructures/SingleLinkedList/SingleLinkedList.h"
-#include <stdio.h>
-#include <stdlib.h>
-
 /** 
  * Type: _shell_io_state
  * ---------------
@@ -36,7 +27,7 @@ typedef enum{_shell_io_msg_state_INFO, _shell_io_msg_state_WARNING,
  *
  * parameters => points to SlinkedList which will supports char* as it's values.
  */
-static inline _shell_io_state getInputFromUser(SlinkedList* parameters);
+_shell_io_state getInputFromUser(SlinkedList* parameters);
 
 
  /** 
@@ -46,7 +37,7 @@ static inline _shell_io_state getInputFromUser(SlinkedList* parameters);
  *
  * varCHar => the char to be tested.
  */
-static inline _shell_io_state validateVarChar(char varCHar, int index);
+_shell_io_state validateVarChar(char varCHar, int index);
 
  /** 
  * Function: substitueVars
@@ -55,7 +46,7 @@ static inline _shell_io_state validateVarChar(char varCHar, int index);
  *
  * str => pointer to the string to be handled.
  */
-static inline _shell_io_state substitueVars(char** varCHar);
+_shell_io_state substitueVars(char** varCHar);
 
 
 /** 
@@ -63,6 +54,6 @@ static inline _shell_io_state substitueVars(char** varCHar);
  * ---------------
  * given a message this will format and print the message.
  */
-static inline _shell_io_state printToUser(char* identifier, char* message, shell_io_msg_state state, int o1, int o2);
+_shell_io_state printToUser(char* identifier, char* message, shell_io_msg_state state, int o1, int o2);
 
  #endif

@@ -10,7 +10,7 @@
  * ---------------
  * set signals handlers.
  */
-static inline void setSIG();
+void setSIG();
 
 
  #endif

@@ -1,5 +1,3 @@
-#include "SingleLinkedList.h"
-
 //create and return Node in the heap
 static inline Snode* CreateNode(SlinkedList* x, void* elementAddress, Snode* next){
 	//malloc the node

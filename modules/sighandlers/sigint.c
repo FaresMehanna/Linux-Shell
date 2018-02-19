@@ -1,8 +1,8 @@
-#include "sigint.h"
+void sigintHandlerCleanAndExit(int s){
+/*NOTHING HAPPENS*/
+}
 
-static inline void sigintHandlerCleanAndExit(int s){/*NOTHING HAPPENS*/}
-
-static inline void SIGINThandler(){
+void SIGINThandler(){
 	struct sigaction sigIntHandler;
 	sigIntHandler.sa_handler = sigintHandlerCleanAndExit;
 	sigemptyset(&sigIntHandler.sa_mask);

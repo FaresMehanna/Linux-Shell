@@ -8,13 +8,6 @@
 #ifndef _interactive_MODE_MODULE_
 #define _interactive_MODE_MODULE_
 
-#include <stdio.h>
-#include "../../executers/executers_handler.h"
-#include "../../dir/dirs.h"
-#include "../../shellio/shellio.h"
-#include "../../memorymanger/memmange.h"
-#include "../../../datastructures/SingleLinkedList/SingleLinkedList.h"
-
 /** 
  * Type: _interactive_mode_state
  * ---------------
@@ -29,6 +22,6 @@ typedef enum{_interactive_mode_SUCC, _interactive_mode_MEMERR} _interactive_mode
  * read line after line from user and execute it.
    with executors.
  */
-static inline _interactive_mode_state startInteractiveMode();
+_interactive_mode_state startInteractiveMode();
 
  #endif

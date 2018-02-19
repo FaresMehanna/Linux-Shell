@@ -1,4 +1,4 @@
-	/** 
+/** 
  * File: textio.h
  * ---------------
  * Defines the interface for the text I/O module.
@@ -16,12 +16,7 @@
  * state of the operation, this is the return type for all the functions.
  */
 typedef enum{_text_io_SUCC, _text_io_MEMERR, _text_io_ERR, _text_io_SUCC_DONE} _text_io_state;
-#include "string.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include "../shellio/shellio.h"
-#include "../memorymanger/memmange.h"
-#include "../../datastructures/SingleLinkedList/SingleLinkedList.h"
+
 /** 
  * Function: readNextLine
  * ---------------
@@ -29,7 +24,7 @@ typedef enum{_text_io_SUCC, _text_io_MEMERR, _text_io_ERR, _text_io_SUCC_DONE} _
  *
  * destination => will point to malloced string, user responsibility to free the data.
  */
-static inline _text_io_state readNextLine(char** destination, FILE* ptr);
+_text_io_state readNextLine(char** destination, FILE* ptr);
 
 
 /** 
@@ -39,7 +34,7 @@ static inline _text_io_state readNextLine(char** destination, FILE* ptr);
  *
  * parameters => points to SlinkedList which will supports char* as it's value.
  */
-static inline _text_io_state getParameters(char* line, SlinkedList* parameters);
+_text_io_state getParameters(char* line, SlinkedList* parameters);
 
 
 /** 
@@ -50,6 +45,6 @@ static inline _text_io_state getParameters(char* line, SlinkedList* parameters);
  * line => points to string which will be printed.
  * freeB => flag to indicate wether the function should free the line or not.
  */
-static inline _text_io_state printLine(char* line, int freeB);
+_text_io_state printLine(char* line, int freeB);
 
  #endif

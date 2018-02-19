@@ -1,5 +1,3 @@
-#include "execv.h"
-
 static inline char* getFullPath(SlinkedList* parameters){
 	
 	char* binaryName;
@@ -8,31 +6,60 @@ static inline char* getFullPath(SlinkedList* parameters){
 
 	//handle full path given
 	if(binaryName[0] == '/'){
-		if(access(binaryName, F_OK) == 0)		return binaryName;
+		
+		if(access(binaryName, F_OK) == 0){
+			return binaryName;
+		}
+
 		return NULL;
 	}
 
 	//handle ./execution
 	if(len >= 2 && binaryName[0] == '.' && binaryName[1] == '/'){
+
 		int counter = 2;
 		char* curr = getCurrDir();	//get current directory
-		if(curr == NULL)	return NULL;
+		
+		if(curr == NULL){
+			return NULL;
+		}
+		
 		struct string path;	//string to build the path
-		if(createStringFromCharArr(&path,curr) != _text_io_SUCC)	return NULL;	//create the string from the curr dir
+		
+		if(createStringFromCharArr(&path,curr) != _text_io_SUCC){
+			return NULL;	//create the string from the curr dir
+		}
+
 		//add the words to the string
-		if(addCharToString(&path,'/') != _text_io_SUCC)	return NULL;
-		while(binaryName[counter] != '\0')	if(addCharToString(&path,binaryName[counter++]) != _text_io_SUCC)	return NULL;
+		if(addCharToString(&path,'/') != _text_io_SUCC){
+			return NULL;
+		}
+		
+		while(binaryName[counter] != '\0'){
+		
+			if(addCharToString(&path,binaryName[counter++]) != _text_io_SUCC){
+				return NULL;
+			}
+		}
+
 		//get the string and return it
 		char* fullPath;
 		trimToActSize(&path);
 		getCharPointer(&path,&fullPath);
-		if(access(fullPath, F_OK) == 0)		return binaryName;
+		
+		if(access(fullPath, F_OK) == 0){
+			return binaryName;
+		}
+
 		return NULL;
 	}
 
 	//TRY to get the path from $PATH
 	char* PATHORIGINAL = getenv("PATH");
-	if(!PATHORIGINAL)	return NULL;
+	if(!PATHORIGINAL){
+		return NULL;
+	}
+
 	char* PATH = cloneStr(PATHORIGINAL);
 	char * pch;
 	pch = strtok(PATH,":");
@@ -41,55 +68,85 @@ static inline char* getFullPath(SlinkedList* parameters){
 	{
 		int counter = 0;
 		struct string path;
-		if(createStringFromCharArr(&path,pch) != _text_io_SUCC)	return NULL;
+		
+		if(createStringFromCharArr(&path,pch) != _text_io_SUCC){
+			return NULL;
+		}
+
 		addCharToString(&path,'/');
-		while(binaryName[counter] != '\0')	if(addCharToString(&path,binaryName[counter++]) != _text_io_SUCC)	return NULL;
+		while(binaryName[counter] != '\0'){
+
+			if(addCharToString(&path,binaryName[counter++]) != _text_io_SUCC){
+				return NULL;
+			}
+		}
+
 
 		char* fullPath;
 		trimToActSize(&path);
 		getCharPointer(&path,&fullPath);
 
-		if(access(fullPath, F_OK) == 0)		
+		if(access(fullPath, F_OK) == 0){	
 			return fullPath;
+		}
 
 		pch = strtok (NULL, ":");
 	}
+
 	return NULL;
 }
 
 static inline void executeShell(char* path, char** params, int background){
+
     pid_t pid = fork();
     int status;
 
     if (pid == 0){
+    
         execv(path,params);
         printToUser("CHILD PROCESS","CAN'T FORK",_shell_io_msg_state_ERROR,0,0);
         exit(EXIT_FAILURE);
-    }
-    else if (pid > 0){
+
+    }else if (pid > 0){
+
     	//log creation of the process
 		char buff[128];
 		sprintf(buff,"Child %d did start.",pid);
-		if(writeToLog(buff) == _log_io_FILE_ERR)	printToUser("EXECV EXECUTOR","LOG FILE ISN'T ACCESSIBLE" ,_shell_io_msg_state_WARNING,0,0);
-    	if(!background)
+
+		if(writeToLog(buff) == _log_io_FILE_ERR){
+			printToUser("EXECV EXECUTOR","LOG FILE ISN'T ACCESSIBLE" ,_shell_io_msg_state_WARNING,0,0);
+		}
+
+    	if(!background){
+    		
+    		//wait child
     		do{
 				waitpid (pid, &status, WUNTRACED);
 			}while(!WIFEXITED(status) && !WIFSIGNALED(status));
-		else
+		
+		}else{
 			printToUser("EXECV EXECUTOR","CHILD PROCESS STARETED IN BACKGROUND" ,_shell_io_msg_state_INFO,0,0);
+		}
 
-    }else
+    }else{
         printToUser("PARENT PROCESS","CAN'T FORK",_shell_io_msg_state_ERROR,0,0);
+    }
 }
 
-static inline executor_state execvShell(SlinkedList* parameters){
+executor_state execvShell(SlinkedList* parameters){
+	
 	char* fullP = getFullPath(parameters);
-	if(!fullP)	return executor_NOOP;
+	if(!fullP){
+		return executor_NOOP;
+	}
+	
 	int foreBackGround = 0;
 	char* last;
 	
 	SLinkedListPeekBack(parameters,&last);
-	if(streq(last,"&"))	foreBackGround = 1;
+	if(streq(last,"&")){
+		foreBackGround = 1;
+	}
 
 	char* params[SLinkedListSize(parameters)-foreBackGround+1];
 
@@ -101,8 +158,9 @@ static inline executor_state execvShell(SlinkedList* parameters){
 	while(SLinkedListIteratorHasNext(&it)){
 		char* curr;
 		SLinkedListIteratorGetNext(&it,&curr);
-		SLinkedListIteratorGoNext(&it);
 		params[counter++] = curr;
+
+		SLinkedListIteratorGoNext(&it);
 	}
 	params[counter-foreBackGround] = NULL;
 
