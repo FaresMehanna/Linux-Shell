@@ -13,7 +13,7 @@ gcc main.c -o shell
 ```
 or
 ```
-./shell bathcfile
+./shell batchfile
 ```
 
 
