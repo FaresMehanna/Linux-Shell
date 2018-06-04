@@ -14,7 +14,9 @@
  * ---------------
  * state of the operation
  */
- typedef enum{_HashmapChain_SUCC, _HashmapChain_MEMERR, _HashmapChain_SIZEERR} _HashmapChain_state;
+typedef enum {
+    _HashmapChain_SUCC, _HashmapChain_MEMERR, _HashmapChain_SIZEERR
+} _HashmapChain_state;
 
 /** 
  * Type: FreeFunction
@@ -26,7 +28,7 @@
  * recieve one element at time and it's job to free it. client will need to use it 
  * with all malloced variable, client will send NULL if it's in the stack
  */
-typedef void (*FreeFunction) (void*);
+typedef void (*FreeFunction)(void *);
 
 /** 
  * Type: CompareFunction
@@ -37,7 +39,7 @@ typedef void (*FreeFunction) (void*);
  * return the result
  * MUST return one IF P1 == P2, zero otherwise
  */
-typedef int (*CompareFunction) (void*,void*);
+typedef int (*CompareFunction)(void *, void *);
 
 /** 
  * Type: Hash
@@ -47,12 +49,13 @@ typedef int (*CompareFunction) (void*,void*);
  * Takes pointer to the key of the element and it's size and max hashed number
  * should return valid hash number
  */
-typedef unsigned int (*Hash) (void* key, int keysize, long long max);
+typedef unsigned int (*Hash)(void *key, int keysize, long long max);
 
 
 //memory abs
-typedef void* (*mallocDatax) (size_t);
-typedef void (*freeDatax) (void*);
+typedef void *(*mallocDatax)(size_t);
+
+typedef void (*freeDatax)(void *);
 
 
 /** 
@@ -67,19 +70,19 @@ typedef void (*freeDatax) (void*);
  * keyfreeFN => pointer to client supplied function used when freeing the key element
  * CmpFN => pointer to client supplied function used when comparing the key elements
  */
-typedef struct HashmapChain{
-	long long size;
-	long long actualsize;
-	int elemsize;
-	int keysize;
-	SlinkedList** data;
-	FreeFunction datafreeFN;
-	FreeFunction keyfreeFN;
-	CompareFunction CmpFN;
-	Hash getHash;
-	mallocData MD;
-	freeData FD;
-}HashmapChain;
+typedef struct HashmapChain {
+    long long size;
+    long long actualsize;
+    int elemsize;
+    int keysize;
+    SlinkedList **data;
+    FreeFunction datafreeFN;
+    FreeFunction keyfreeFN;
+    CompareFunction CmpFN;
+    Hash getHash;
+    mallocData MD;
+    freeData FD;
+} HashmapChain;
 
 /** 
  * Type: DataKey
@@ -89,10 +92,10 @@ typedef struct HashmapChain{
  * data => pointing to the data
  * key => pointing to the key
  */
-typedef struct DataKey{
-	void* data;
-	void* key;
-}DataKey;
+typedef struct DataKey {
+    void *data;
+    void *key;
+} DataKey;
 
 /** 
  * Function: InitializeHashmapChain
@@ -104,8 +107,9 @@ typedef struct DataKey{
  * keyfreeFN => pointer to client supplied function used when freeing the key element
  * CmpFN => pointer to client supplied function used when comparing the key elements
  */
-static inline _HashmapChain_state InitializeHashmapChain(HashmapChain* x, int dataSize, int keySize, CompareFunction,
- FreeFunction datafreeFN, FreeFunction keyfreeFN, Hash hashFn, mallocData MD, freeData FD);
+_HashmapChain_state InitializeHashmapChain(HashmapChain *x, int dataSize, int keySize, CompareFunction,
+                                           FreeFunction datafreeFN, FreeFunction keyfreeFN, Hash hashFn, mallocData MD,
+                                           freeData FD);
 
 /** 
  * Function: DisposeHashmapChain
@@ -114,7 +118,7 @@ static inline _HashmapChain_state InitializeHashmapChain(HashmapChain* x, int da
  *
  * x => pointer to the Hashmap
  */
-static inline _HashmapChain_state DisposeHashmapChain(HashmapChain* x);
+_HashmapChain_state DisposeHashmapChain(HashmapChain *x);
 
 /** 
  * Function: HashmapChainAddKey
@@ -125,7 +129,7 @@ static inline _HashmapChain_state DisposeHashmapChain(HashmapChain* x);
  * key => pointer to the key that related to the element
  * elementAddress => pointer to the element you want to store
  */
-static inline _HashmapChain_state HashmapChainAddKey(HashmapChain* x, void* key, void* elementAddress);
+_HashmapChain_state HashmapChainAddKey(HashmapChain *x, void *key, void *elementAddress);
 
 /** 
  * Function: HashmapChainSearch
@@ -139,7 +143,7 @@ static inline _HashmapChain_state HashmapChainAddKey(HashmapChain* x, void* key,
  * found = 1 if the key was found and written to tragetAddress, 0
  * otherwise
  */
-static inline _HashmapChain_state HashmapChainSearch(HashmapChain* x, void* key, void* targetAddress, int* found);
+_HashmapChain_state HashmapChainSearch(HashmapChain *x, void *key, void *targetAddress, int *found);
 
 /** 
  * Function: HashmapChainDelete
@@ -151,9 +155,15 @@ static inline _HashmapChain_state HashmapChainSearch(HashmapChain* x, void* key,
  * userDel = 1 then the function will use the user defined function to free the element.
  * return 1 if the key was found and deleted, 0 otherwise
  */
-static inline _HashmapChain_state HashmapChainDelete(HashmapChain* x, void* key, int* found, int userDel);
+_HashmapChain_state HashmapChainDelete(HashmapChain *x, void *key, int *found, int userDel);
 
- //return the size of the hash
-static inline long long HashmapChainSize(HashmapChain* x);
+/**
+ * Function: HashmapChainSize
+ * ---------------
+ * return number of items in the hashmap.
+ *
+ * x => pointer to the Hashmap
+ */
+long long HashmapChainSize(HashmapChain *x);
 
- #endif
+#endif
