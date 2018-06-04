@@ -28,7 +28,7 @@ or
 
 
 
-### Data Structures implemented in the shell.
+## Data Structures implemented in the shell
 
 ```
           +-------------------------+
@@ -51,7 +51,7 @@ or
 
 
 
-## Modules in the shell.
+## Modules in the shell
 
 ```
                  +--------------------+    +--------------------+
@@ -80,9 +80,10 @@ or
 ```
 
 
-In the Shell, Every module specified by an Interface and have a unique return type with a set of unique return values.
+* In the Shell, Every module specified by an Interface and have a unique return type with a set of unique return values.
+* Set of unique return values are set for each modules for easier debugging and more helpful error reporting to the user.
+* The Modularity in the design helps in expanding/modifying the functionality of a module independently from other modules.
 
-The Modularity in the design helps in expanding/modifying the functionality of a module independently from other modules.
 
 * Directory Module : Handles the work with the current directory and moving from and to different directories.
 * Text I/O Module : Handles the work with terminal and files in low level manner.
