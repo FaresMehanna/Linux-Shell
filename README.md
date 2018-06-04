@@ -29,7 +29,7 @@ or
 
 
 ### Data Structures implemented in the shell.
-
+```
           +-------------------------+
           |                         |
           |     Data Structures     |
@@ -43,6 +43,7 @@ or
 | Singly Linked List |  | Hash Map with Chains |
 |                    |  |                      |
 +--------------------+  +----------------------+
+```
 
 * Implementation of Singly Linked List with Arrays Handles the storage of the sequential data in the Shell.
 * Hash Map used when faster access to the memory needed.
@@ -51,8 +52,7 @@ or
 
 ## Modules in the shell.
 
-
-
+```
                  +--------------------+    +--------------------+
                  |                    |    |                    |
                  |  Directory Module  |    |  File I/O Module   |
@@ -76,7 +76,7 @@ or
                 |    Modes Module    |     |  Executors Module  |
                 |                    |     |                    |
                 +--------------------+     +--------------------+
-
+```
 
 
 In the shell, Every module specified by Interface and have a unique return type with a set of unique return values.
