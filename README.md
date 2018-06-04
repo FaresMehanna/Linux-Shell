@@ -29,6 +29,7 @@ or
 
 
 ### Data Structures implemented in the shell.
+
 ```
           +-------------------------+
           |                         |
@@ -46,7 +47,7 @@ or
 ```
 
 * Implementation of Singly Linked List with Arrays Handles the storage of the sequential data in the Shell.
-* Hash Map used when faster access to the memory needed.
+* Hash Maps used when faster access to specific data in the memory needed.
 
 
 
@@ -61,16 +62,16 @@ or
                            ^                         ^
 +--------------------+     |                         |     +--------------------+
 |                    |     |                         |     |                    |
-|  Signals Handler   | +-----------------------------------+     Shell I/O      |
+|  Signals Handler   +<----------------------------------->+     Shell I/O      |
 |                    |     |                         |     |                    |
 +--------------------+     |                         |     +--------------------+
                            |      Shell Modules      |
 +--------------------+     |                         |     +--------------------+
 |                    |     |                         |     |                    |
-|   Memory Manager   | -----------------------------------^+      Text I/O      |
+|   Memory Manager   +<----------------------------------->+      Text I/O      |
 |                    |     |                         |     |                    |
 +--------------------+     |                         |     +--------------------+
-                           ^                         ^
+                           v                         v
                 +----------+---------+     +---------+----------+
                 |                    |     |                    |
                 |    Modes Module    |     |  Executors Module  |
@@ -79,9 +80,9 @@ or
 ```
 
 
-In the shell, Every module specified by Interface and have a unique return type with a set of unique return values.
+In the Shell, Every module specified by an Interface and have a unique return type with a set of unique return values.
 
-the Modularity in the design helps in expanding/modifying the functionality independently from the other modules.
+The Modularity in the design helps in expanding/modifying the functionality of a module independently from other modules.
 
 * Directory Module : Handles the work with the current directory and moving from and to different directories.
 * Text I/O Module : Handles the work with terminal and files in low level manner.
@@ -90,4 +91,4 @@ the Modularity in the design helps in expanding/modifying the functionality inde
 * Modes Module : Contains different Modes like Interactive or Batch mode. New modes can be added later if needed.
 * Signals Handler Module : Handle the needed signals received from the operating system.
 * Memory Manager Module : Implementation of a garbage collector to handle mallocation and freeing of the data.
-* Executors Module : Implementation of several Executors to execute the user input. Can be expanded if needed.
+* Executors Module : Implementation of several Executors to execute the user input - as cd, echo, pwd, history, exit and expressions - , Can be expanded if needed.
