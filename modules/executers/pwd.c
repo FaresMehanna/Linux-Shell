@@ -1,21 +1,23 @@
-executor_state pwdShell(SlinkedList* parameters){
-	
-	if(SLinkedListSize(parameters) != 1)
-		return executor_NOOP;
+executor_state pwdShell(SlinkedList *parameters) {
 
-	char* firstWord;
-	SLinkedListPeekFront(parameters,&firstWord);
+    if (SLinkedListSize(parameters) != 1) {
+        return executor_NOOP;
+    }
 
-	//execute the instruction if only on word and it's equal "pwd"
-	if(streq(firstWord,"pwd")){
+    char *firstWord;
+    SLinkedListPeekFront(parameters, &firstWord);
 
-		char* currentDir = getCurrDir();
+    //execute the instruction if only on word and it's equal "pwd"
+    if (streq(firstWord, "pwd")) {
 
-		if(currentDir != NULL)
-			printf("%s\n",currentDir);
-	
-		return executor_DONE;
-	}
+        char *currentDir = getCurrDir();
 
-	return executor_NOOP;
+        if (currentDir != NULL) {
+            printf("%s\n", currentDir);
+        }
+
+        return executor_DONE;
+    }
+
+    return executor_NOOP;
 }

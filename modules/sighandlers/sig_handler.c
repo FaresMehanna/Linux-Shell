@@ -1,4 +1,4 @@
-void setSIG(){
-	SIGINThandler();
-	SIGCHLDhandler();
+void setSIG() {
+    SIGINThandler();
+    SIGCHLDhandler();
 }

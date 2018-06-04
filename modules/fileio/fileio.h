@@ -13,41 +13,43 @@
  * ---------------
  * state of the operation, this is the return type for all the functions.
  */
-typedef enum{_file_io_SUCC,_file_io_DONE, _file_io_MEMERR, _file_io_FILE_INPUTERR,
- _file_io_FILE_NFOUND} _file_io_state;
+typedef enum {
+    _file_io_SUCC, _file_io_DONE, _file_io_MEMERR, _file_io_FILE_INPUTERR,
+    _file_io_FILE_NFOUND
+} _file_io_state;
 
 
-struct fileDate{
-	FILE *fp;
+struct fileDate {
+    FILE *fp;
 };
 
- /** 
- * Function: readFile
- * ---------------
- * read the data from file line by line.
- *
- * file => pointer to fileDate struct.
- * line => pointer to char* which will be pointing to the line.
- */
-_file_io_state readFile(struct fileDate* file, char** line);
+/**
+* Function: readFile
+* ---------------
+* read the data from file line by line.
+*
+* file => pointer to fileDate struct.
+* line => pointer to char* which will be pointing to the line.
+*/
+_file_io_state readFile(struct fileDate *file, char **line);
 
- /** 
- * Function: setFile
- * ---------------
- * open the file.
- *
- * file => pointer to fileDate struct.
- * destination => path to wanted file to be read.
- */
-_file_io_state setFile(struct fileDate* file, char* destination);
+/**
+* Function: setFile
+* ---------------
+* open the file.
+*
+* file => pointer to fileDate struct.
+* destination => path to wanted file to be read.
+*/
+_file_io_state setFile(struct fileDate *file, char *destination);
 
- /** 
- * Function: closeFile
- * ---------------
- * close the file.
- *
- * file => pointer to fileDate struct.
- */
-_file_io_state closeFile(struct fileDate* file);
+/**
+* Function: closeFile
+* ---------------
+* close the file.
+*
+* file => pointer to fileDate struct.
+*/
+_file_io_state closeFile(struct fileDate *file);
 
- #endif
+#endif

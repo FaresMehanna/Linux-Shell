@@ -7,39 +7,39 @@
  */
 #ifndef _MEMMANGE_MODULE_
 #define _MEMMANGE_MODULE_
- 
- struct mem{
- 	HashmapChain* map;
- };
 
- struct mem GLOBAL_MEMORY_STORAGE_;
+struct mem {
+    HashmapChain *map;
+};
 
- /** 
- * Function: smalloc
- * ---------------
- * malloc the needed size of bytes and return the address
- */
-void* smalloc(size_t size);
+struct mem GLOBAL_MEMORY_STORAGE_;
 
- /** 
- * Function: sfree
- * ---------------
- * free the give pointer of data
- */
-void sfree(void* ptr);
+/**
+* Function: smalloc
+* ---------------
+* malloc the needed size of bytes and return the address
+*/
+void *smalloc(size_t size);
 
- /** 
- * Function: memoryClear
- * ---------------
- * clear all the malloced data
- */
+/**
+* Function: sfree
+* ---------------
+* free the give pointer of data
+*/
+void sfree(void *ptr);
+
+/**
+* Function: memoryClear
+* ---------------
+* clear all the malloced data
+*/
 void memoryClear();
 
- /** 
- * Function: srealloc
- * ---------------
- * realloc the memory to different size.
- */
-void* srealloc(void* ptr, size_t newSize);
+/**
+* Function: srealloc
+* ---------------
+* realloc the memory to different size.
+*/
+void *srealloc(void *ptr, size_t newSize);
 
- #endif
+#endif

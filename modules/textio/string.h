@@ -17,10 +17,10 @@
  * actLength => actual length of the string.
  * memlength => memory size reserved for the string.
  */
-struct string{
-	char* data;
-	int actLength;
-	int memLength;
+struct string {
+    char *data;
+    int actLength;
+    int memLength;
 };
 
 /** 
@@ -30,9 +30,11 @@ struct string{
  *
  * str => struct defined by the user.
  */
-_text_io_state createString(struct string* str);
-_text_io_state createStringFromCharArr(struct string* str, const char* oStr);
-char* cloneStr(char* x);
+_text_io_state createString(struct string *str);
+
+_text_io_state createStringFromCharArr(struct string *str, const char *oStr);
+
+char *cloneStr(char *x);
 
 /** 
  * Function: freeString
@@ -41,7 +43,7 @@ char* cloneStr(char* x);
  *
  * str => struct defined by the user.
  */
-_text_io_state freeString(struct string* str);
+_text_io_state freeString(struct string *str);
 
 /** 
  * Function: addCharToString
@@ -51,7 +53,7 @@ _text_io_state freeString(struct string* str);
  * str => struct defined by the user.
  * ch => the char which will be added to the end of the string.
  */
-_text_io_state addCharToString(struct string* str, char ch);
+_text_io_state addCharToString(struct string *str, char ch);
 
 /** 
  * Function: trimToActSize
@@ -60,7 +62,7 @@ _text_io_state addCharToString(struct string* str, char ch);
  *
  * str => struct defined by the user.
  */
-_text_io_state trimToActSize(struct string* str);
+_text_io_state trimToActSize(struct string *str);
 
 /** 
  * Function: getCharPointer
@@ -70,9 +72,9 @@ _text_io_state trimToActSize(struct string* str);
  * str => struct defined by the user.
  * destination => destination to write the address.
  */
-_text_io_state getCharPointer(struct string* str, char** destination);
+_text_io_state getCharPointer(struct string *str, char **destination);
 
 
-int streq(const char* str1, const char* str2);
+int streq(const char *str1, const char *str2);
 
- #endif
+#endif

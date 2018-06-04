@@ -14,16 +14,17 @@
  * ---------------
  * state of the operation, this is the return type for all the functions.
  */
-typedef enum{_dir_SUCC, _dir_MEMERR, _dir_NFOUND, _dir_ERR} _dir_state;
+typedef enum {
+    _dir_SUCC, _dir_MEMERR, _dir_NFOUND, _dir_ERR
+} _dir_state;
 
 
+/**
+* Function: getCurrDir
+* ---------------
+* return sMalloced string of the current directory.
+*/
+char *getCurrDir();
 
- /** 
- * Function: getCurrDir
- * ---------------
- * return sMalloced string of the current directory.
- */
-char* getCurrDir();
 
-
- #endif
+#endif
