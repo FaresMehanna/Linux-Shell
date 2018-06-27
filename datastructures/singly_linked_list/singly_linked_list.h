@@ -271,7 +271,7 @@ SinglyLinkedListState singly_linked_list_insert(SinglyLinkedList *list, uint32_t
  * If not found the index value will be -1.
  */
 SinglyLinkedListState singly_linked_list_search(SinglyLinkedList *list, void *key_address, ElementsCompareFunction,
-                                                uint32_t *index);    //O(N)
+                                                int32_t *index);    //O(N)
 
 /** 
  * Function: singly_linked_list_size

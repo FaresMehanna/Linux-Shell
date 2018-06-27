@@ -92,7 +92,7 @@ SinglyLinkedListState dispose_singly_linked_list(SinglyLinkedList *list) {
     first_iterator = second_iterator;
 
     //Free every Node
-    for (int i = 0; i < singly_linked_list_size(list); i++) {
+    for (uint64_t i = 0; i < singly_linked_list_size(list); i++) {
         second_iterator = first_iterator->next;
         totally_free_node(list, first_iterator);
         first_iterator = second_iterator;
@@ -281,7 +281,7 @@ SinglyLinkedListState singly_linked_list_get(SinglyLinkedList *list, uint32_t in
 
     //else go to the node wanted
     SinglyLinkedListNode *current = list->head;
-    for (int i = 0; i < index; i++) {
+    for (uint64_t i = 0; i < index; i++) {
         current = current->next;
     }
 
@@ -307,7 +307,7 @@ SinglyLinkedListState singly_linked_list_remove(SinglyLinkedList *list, uint32_t
 
     //else go to the node wanted
     SinglyLinkedListNode *current = list->head;
-    for (int i = 0; i < index; i++) {
+    for (uint64_t i = 0; i < index; i++) {
         current = current->next;
     }
 
@@ -340,7 +340,7 @@ SinglyLinkedListState singly_linked_list_insert(SinglyLinkedList *list, uint32_t
 
         /* if the index is in between, get the node and create the node and increase the size */
         SinglyLinkedListNode *current = list->head;
-        for (int i = 0; i < index; i++) {
+        for (uint64_t i = 0; i < index; i++) {
             current = current->next;
         }
 
@@ -356,13 +356,13 @@ SinglyLinkedListState singly_linked_list_insert(SinglyLinkedList *list, uint32_t
 }
 
 SinglyLinkedListState singly_linked_list_search(SinglyLinkedList *list, void *key_address,
-                                                ElementsCompareFunction compare_function, uint32_t *index) {
+                                                ElementsCompareFunction compare_function, int32_t *index) {
 
     //search the linked list for key, using the ElementsCompareFunction provided by the user
     //return first index of the key if found else -1
     SinglyLinkedListNode *current = list->head;
 
-    for (int i = 0; i < singly_linked_list_size(list); i++) {
+    for (uint64_t i = 0; i < singly_linked_list_size(list); i++) {
 
         current = current->next;
 

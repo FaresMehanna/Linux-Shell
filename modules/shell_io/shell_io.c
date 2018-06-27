@@ -126,7 +126,7 @@ ShellIOState substitute_variables(char **line){
 
     char *current_line = *line;
 
-    for (int32_t i = 0; i < len; i++) {
+    for (uint32_t i = 0; i < len; i++) {
         switch (current_line[i]) {
 
             case '$':
@@ -152,9 +152,9 @@ ShellIOState substitute_variables(char **line){
             case '~':
 
                 //substitute with $HOME
-                if ((i - 1 >= 0 && current_line[i - 1] == ' ' && i + 1 == len) ||
-                    (i - 1 >= 0 && current_line[i - 1] == ' ' && i + 1 < len && current_line[i + 1] == ' ') ||
-                    (i - 1 >= 0 && current_line[i - 1] == ' ' && i + 1 < len && current_line[i + 1] == '/')) {
+                if (((int64_t)i - 1 >= 0 && current_line[i - 1] == ' ' && i + 1 == len) ||
+                    ((int64_t)i - 1 >= 0 && current_line[i - 1] == ' ' && i + 1 < len && current_line[i + 1] == ' ') ||
+                    ((int64_t)i - 1 >= 0 && current_line[i - 1] == ' ' && i + 1 < len && current_line[i + 1] == '/')) {
 
                     char *home_temp = getenv("HOME");
                     temp_length = 0;

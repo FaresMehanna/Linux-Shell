@@ -21,7 +21,7 @@ TextIOState read_next_line(char **destination, FILE *ptr) {
     // max num of characters
     uint32_t size_max = 512000;
     // character read or EOF
-    uint32_t c;
+    char c;
 
     //NULL file
     if (!ptr) {
