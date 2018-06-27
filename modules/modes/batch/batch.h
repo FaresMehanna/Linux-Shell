@@ -5,25 +5,25 @@
  *
  * This module handles batch mode.
  */
-#ifndef _BATCH_MODE_MODULE_
-#define _BATCH_MODE_MODULE_
+#ifndef batch_mode_h
+#define batch_mode_h
 
 /** 
- * Type: _batch_mode_state
+ * Type: BatchModeState
  * ---------------
  * state of the operation, this is the return type for all the functions.
  */
 typedef enum {
-    _batch_mode_SUCC, _batch_mode_MEMERR, _batch_mode_FILEERR
-} _batch_mode_state;
+    batch_mode_success, batch_mode_memory_error, batch_mode_file_error
+} BatchModeState;
 
 
 /**
-* Function: startBatchMode
+* Function: start_batch_mode
 * ---------------
 * read line after line from user and execute it.
   with executors.
 */
-_batch_mode_state startBatchMode(char *file);
+BatchModeState start_batch_mode(char *file);
 
 #endif

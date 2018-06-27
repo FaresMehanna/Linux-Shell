@@ -5,25 +5,25 @@
  *
  * This module handles interactive mode.
  */
-#ifndef _interactive_MODE_MODULE_
-#define _interactive_MODE_MODULE_
+#ifndef interactive_mode_h
+#define interactive_mode_h
 
 /** 
- * Type: _interactive_mode_state
+ * Type: InteractiveModeState
  * ---------------
  * state of the operation, this is the return type for all the functions.
  */
 typedef enum {
-    _interactive_mode_SUCC, _interactive_mode_MEMERR
-} _interactive_mode_state;
+    interactive_mode_success, interactive_mode_memory_error
+} InteractiveModeState;
 
 
 /**
-* Function: startInteractiveMode
+* Function: start_interactive_mode
 * ---------------
 * read line after line from user and execute it.
   with executors.
 */
-_interactive_mode_state startInteractiveMode();
+InteractiveModeState start_interactive_mode();
 
 #endif

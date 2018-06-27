@@ -1,67 +1,81 @@
+//Language Libraries
+#include <fcntl.h>
+#include <unistd.h>
 
-_batch_mode_state startBatchMode(char *filePath) {
+//Modules
+#include "batch.h"
+#include "../../memory_manager/memory_manager.h"
+#include "../../shell_io/shell_io.h"
+#include "../../file_io/file_io.h"
+#include "../../text_io/text_io.h"
+#include "../../executors/executors_handler.h"
+
+//Data structures
+#include "../../../datastructures/singly_linked_list/singly_linked_list.h"
+
+BatchModeState start_batch_mode(char *file_path) {
 
     //try to open the batch file
-    struct fileDate file;
-    if (setFile(&file, filePath) != _file_io_SUCC) {
-        printToUser("BATCH MODE MODULE", "FILE NOT FOUND", _shell_io_msg_state_ERROR);
-        return _batch_mode_FILEERR;
+    struct FileData file;
+    if (set_file(&file, file_path) != file_io_success) {
+        print_to_user("BATCH MODE MODULE", "FILE NOT FOUND", shell_error_message);
+        return batch_mode_file_error;
     }
 
     //get input from the file
-    char *currLine;
-    _file_io_state s = readFile(&file, &currLine);
+    char *current_line;
+    FileIOState s = read_file(&file, &current_line);
 
     //make the IO non blocking so we can catch ctrl+D from the stdin
     fcntl(0, F_SETFL, fcntl(0, F_GETFL) | O_NONBLOCK);
     char buff[2];
 
     //while there is more data
-    while (s == _file_io_SUCC || s == _file_io_DONE) {
+    while (s == file_io_success || s == file_io_last_line) {
 
         //try to read ctrl+d from stdin
         if (read(0, buff, 1) == 0) {
-            memoryClear();
-            return _batch_mode_SUCC;
+            memory_clear();
+            return batch_mode_success;
         }
 
         //print the curr Line
-        printf(">> %s\n", currLine);
+        printf(">> %s\n", current_line);
 
-        substitueVars(&currLine);
+        substitute_variables(&current_line);
 
         //get the parameters of the line
-        SlinkedList parameters;
-        if (getParameters(currLine, &parameters) != _text_io_SUCC) {
+        SinglyLinkedList parameters;
+        if (get_parameters(current_line, &parameters) != text_io_success) {
 
-            printToUser("BATCH MODE MODULE", "MEMORY ERROR", _shell_io_msg_state_WARNING);
-            closeFile(&file);
+            print_to_user("BATCH MODE MODULE", "MEMORY ERROR", shell_warning_message);
+            close_file(&file);
 
-            return _batch_mode_MEMERR;
+            return batch_mode_memory_error;
         }
 
         //execute the line
         execute(&parameters);
-        memoryClear();    //clear memory
+        memory_clear();    //clear memory
 
-        if (s == _file_io_DONE) {
+        if (s == file_io_last_line) {
             break;
         }
 
-        s = readFile(&file, &currLine);    //read again
+        s = read_file(&file, &current_line);    //read again
     }
 
     //if there is error in reading a line
-    if (s == _file_io_FILE_INPUTERR) {
+    if (s == file_io_input_error) {
 
-        printToUser("BATCH MODE MODULE", "LENGTH EXCEEDED", _shell_io_msg_state_WARNING);
-        closeFile(&file);
+        print_to_user("BATCH MODE MODULE", "LENGTH EXCEEDED", shell_warning_message);
+        close_file(&file);
 
-        return _batch_mode_FILEERR;
+        return batch_mode_file_error;
     }
 
-    //close the file and return succ if everything Ok!
-    closeFile(&file);
+    //close the file and return success if everything Ok!
+    close_file(&file);
 
-    return _batch_mode_SUCC;
+    return batch_mode_success;
 }
