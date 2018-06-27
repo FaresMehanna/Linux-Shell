@@ -126,7 +126,7 @@ ShellIOState substitute_variables(char **line){
 
     char *current_line = *line;
 
-    for (uint32_t i = 0; i < len; i++) {
+    for (int32_t i = 0; i < len; i++) {
         switch (current_line[i]) {
 
             case '$':

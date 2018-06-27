@@ -356,7 +356,7 @@ SinglyLinkedListState singly_linked_list_insert(SinglyLinkedList *list, uint32_t
 }
 
 SinglyLinkedListState singly_linked_list_search(SinglyLinkedList *list, void *key_address,
-                                                ElementsCompareFunction compare_function, int32_t *index) {
+                                                ElementsCompareFunction compare_function, uint32_t *index) {
 
     //search the linked list for key, using the ElementsCompareFunction provided by the user
     //return first index of the key if found else -1

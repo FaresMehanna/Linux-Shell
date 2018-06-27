@@ -23,7 +23,6 @@ static inline char* handle_full_path_execution(SinglyLinkedList *parameters){
 
     char *binaryName;
     singly_linked_list_peek_front(parameters, &binaryName);
-    int length = strlen(binaryName);
 
     //handle full path given
     if (binaryName[0] == '/') {
@@ -84,7 +83,6 @@ static inline char* handle_in_PATH_execution(SinglyLinkedList *parameters){
 
     char *binaryName;
     singly_linked_list_peek_front(parameters, &binaryName);
-    uint32_t length = strlen(binaryName);
 
     //TRY to get PATH from $PATH
     char *PATH_from_environment = getenv("PATH");
@@ -155,7 +153,7 @@ static inline char *get_full_path(SinglyLinkedList *parameters) {
 static inline void execute_with_execv(char *path, char **params, int background) {
 
     pid_t pid = fork();
-    uint64_t status;
+    int status;
 
     if (pid == 0) {
 

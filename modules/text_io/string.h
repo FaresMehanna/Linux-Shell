@@ -78,6 +78,6 @@ TextIOState trim_to_actual_size(struct String *str);
 TextIOState get_char_pointer(struct String *str, char **destination);
 
 
-int string_equal(const char *str1, const char *str2);
+uint8_t string_equal(const char *str1, const char *str2);
 
 #endif

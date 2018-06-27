@@ -8,19 +8,9 @@
 //Modules Libraries
 #include "memory_manager.h"
 
-//function to get hash value for the addresses
-static inline uint64_t generate_hash(void *key, int keysize, long long max) {
-    return (*(uint64_t *) key) % max;
-}
-
 //function to compare addresses for hash map
 static int compare_uint64_t(void *p1, void *p2) {
     return *(uint64_t *) p1 == *(uint64_t *) p2;
-}
-
-//function to free addresses
-static inline void free_hash(void *p1) {
-    free(*(void **) p1);
 }
 
 static inline void initialize_memory_map() {
@@ -62,7 +52,7 @@ void sfree(void *ptr) {
     uint64_t address = (uint64_t) ptr;
 
     //delete the address from the list if found and free the data
-    uint64_t index;
+    uint32_t index;
     singly_linked_list_search(Global_Memory_Storage.map, &address, compare_uint64_t, &index);
 
     if (index != -1) {
@@ -86,7 +76,7 @@ void *srealloc(void *ptr, uint64_t newSize){
     //without freeing it and add new one
     if (address != NULL && x != y) {
 
-        uint64_t index;
+        uint32_t index;
         //Delete the data from the list
         singly_linked_list_search(Global_Memory_Storage.map, &y, compare_uint64_t, &index);
         if (index != -1) {
