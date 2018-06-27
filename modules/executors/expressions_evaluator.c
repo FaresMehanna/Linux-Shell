@@ -2,6 +2,8 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 //Data structures
 #include "../../datastructures/singly_linked_list/singly_linked_list.h"
 
@@ -11,11 +13,11 @@
 #include "../text_io/string.h"
 #include "../shell_io/shell_io.h"
 
-static inline uint8_t is_valid_key(char* key){
+static inline uint32_t is_valid_key(char* key){
 
-    int length = strlen(key);
+    uint32_t length = strlen(key);
 
-    for (int i = 0; i < length; i++) {
+    for (uint32_t i = 0; i < length; i++) {
 
         if (key[i] >= 'a' && key[i] <= 'z') {
             continue;
@@ -57,7 +59,7 @@ ExecutorState expressions_evaluator(SinglyLinkedList *parameters) {
 
     //make a clone from the word
     char *clone = clone_string(first_word);
-    int old_length = strlen(clone);
+    uint32_t old_length = strlen(clone);
 
     //get the key
     char *key = strtok(clone, "=");
@@ -71,7 +73,7 @@ ExecutorState expressions_evaluator(SinglyLinkedList *parameters) {
     }
 
     //check the value
-    int key_length = strlen(key);
+    uint32_t key_length = strlen(key);
     char *value;
 
     if (old_length == key_length) {

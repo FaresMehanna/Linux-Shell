@@ -10,6 +10,7 @@
 
 //Modules Libraries
 #include "text_io.h"
+#include <stdint.h>
 
 /** 
  * struct string
@@ -22,8 +23,8 @@
  */
 struct String {
     char *data;
-    int actual_length;
-    int memory_length;
+    uint64_t actual_length;
+    uint64_t memory_length;
 };
 
 /** 

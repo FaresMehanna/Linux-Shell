@@ -62,7 +62,7 @@ void sfree(void *ptr) {
     uint64_t address = (uint64_t) ptr;
 
     //delete the address from the list if found and free the data
-    int32_t index;
+    uint64_t index;
     singly_linked_list_search(Global_Memory_Storage.map, &address, compare_uint64_t, &index);
 
     if (index != -1) {
@@ -82,12 +82,11 @@ void *srealloc(void *ptr, uint64_t newSize){
     uint64_t x = (uint64_t) address;
     uint64_t y = (uint64_t) ptr;
 
-    int found;
     //if the reallocation succeeded and return different value, remove the old
     //without freeing it and add new one
     if (address != NULL && x != y) {
 
-        int32_t index;
+        uint64_t index;
         //Delete the data from the list
         singly_linked_list_search(Global_Memory_Storage.map, &y, compare_uint64_t, &index);
         if (index != -1) {

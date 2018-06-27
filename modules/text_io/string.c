@@ -107,8 +107,8 @@ static inline char sml(char x) {
     return x;
 }
 
-int string_equal(const char *str1, const char *str2) {
-    int i = 0;
+uint8_t string_equal(const char *str1, const char *str2) {
+    uint64_t i = 0;
     while (str1[i] != '\0' && str2[i] != '\0') {
         if (sml(str1[i]) != sml(str2[i])) {
             return 0;

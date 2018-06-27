@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
 
 //System Libraries
 #include <sys/wait.h>
@@ -44,7 +45,7 @@ static inline char* handle_in_directory_execution(SinglyLinkedList *parameters){
     //handle ./execution
     if (length >= 2 && binaryName[0] == '.' && binaryName[1] == '/') {
 
-        int counter = 2;
+        uint32_t counter = 2;
         char *current_working_directory = get_current_working_directory();    //get current directory
 
         if (current_working_directory == NULL) {
@@ -83,7 +84,7 @@ static inline char* handle_in_PATH_execution(SinglyLinkedList *parameters){
 
     char *binaryName;
     singly_linked_list_peek_front(parameters, &binaryName);
-    int length = strlen(binaryName);
+    uint32_t length = strlen(binaryName);
 
     //TRY to get PATH from $PATH
     char *PATH_from_environment = getenv("PATH");
@@ -101,7 +102,7 @@ static inline char* handle_in_PATH_execution(SinglyLinkedList *parameters){
 
     while (single_path != NULL) {
 
-        int counter = 0;
+        uint32_t counter = 0;
         struct String path;
 
         if (create_string_from_char_array(&path, single_path) != text_io_success) {
@@ -154,7 +155,7 @@ static inline char *get_full_path(SinglyLinkedList *parameters) {
 static inline void execute_with_execv(char *path, char **params, int background) {
 
     pid_t pid = fork();
-    int status;
+    uint64_t status;
 
     if (pid == 0) {
 
@@ -202,7 +203,7 @@ ExecutorState execute_binary(SinglyLinkedList *parameters) {
         return executor_error;
     }
 
-    int back_ground_execution = 0;
+    uint32_t back_ground_execution = 0;
     char *last_word_in_line;
 
     //check if it is meant to run in the background
@@ -215,7 +216,7 @@ ExecutorState execute_binary(SinglyLinkedList *parameters) {
 
     SinglyLinkedListIterator it;
     singly_linked_list_get_iterator(parameters, &it);
-    int counter = 0;
+    uint32_t counter = 0;
 
     //get the parameter list for execv function
     while (singly_linked_list_iterator_has_next(&it)) {

@@ -1,5 +1,6 @@
 //Language Libraries
 #include <string.h>
+#include <stdint.h>
 
 //Data Structures
 #include "../../datastructures/singly_linked_list/singly_linked_list.h"
@@ -14,13 +15,13 @@ TextIOState read_next_line(char **destination, FILE *ptr) {
     // growable buffer for characters
     char *buffer = NULL;
     // capacity of buffer
-    int capacity = 0;
+    uint32_t capacity = 0;
     // number of characters actually in buffer
-    int size = 0;
+    uint32_t size = 0;
     // max num of characters
-    int size_max = 512000;
+    uint32_t size_max = 512000;
     // character read or EOF
-    int c;
+    uint32_t c;
 
     //NULL file
     if (!ptr) {
@@ -114,9 +115,9 @@ TextIOState get_parameters(char *line, SinglyLinkedList *parameters){
     }
 
     //pointer & flag
-    int in_word = 0;
-    int current_index = 0;
-    int in_double_qoutation = 0;
+    uint8_t in_word = 0;
+    uint32_t current_index = 0;
+    uint8_t in_double_quotation = 0;
 
     //build the string
     struct String current_word;
@@ -132,7 +133,7 @@ TextIOState get_parameters(char *line, SinglyLinkedList *parameters){
                     break;
                 }
 
-                if (in_word && in_double_qoutation) {
+                if (in_word && in_double_quotation) {
                     if (add_char_to_string(&current_word, line[current_index]) != text_io_success) {
                         return text_io_memory_error;
                     }
@@ -150,7 +151,7 @@ TextIOState get_parameters(char *line, SinglyLinkedList *parameters){
             case '"':
 
                 in_word = 1;
-                in_double_qoutation = in_double_qoutation == 0;
+                in_double_quotation = in_double_quotation == 0;
                 break;
 
             default:

@@ -10,7 +10,7 @@
 #include "../text_io/string.h"
 #include "../text_io/text_io.h"
 
-static inline ShellIOState is_valid_char(char character, int index){
+static inline ShellIOState is_valid_char(char character, uint32_t index){
 
     if (character >= 'a' && character <= 'z') {
         return shell_io_success;
@@ -44,7 +44,7 @@ ShellIOState get_input_from_user(SinglyLinkedList *parameters) {
         return shell_io_memory_error;
     }
 
-    int length = strlen(line);
+    uint32_t length = strlen(line);
 
     //handle big instructions
     if (length > 512) {
@@ -81,12 +81,12 @@ ShellIOState print_to_user(char *identifier, char *message, shellIOMessageType t
     return shell_io_success;
 }
 
-static int handle_variable_declaration(char *execution_line, struct String *final_line, int index, int len) {
+static uint32_t handle_variable_declaration(char *execution_line, struct String *final_line, uint32_t index, uint32_t len) {
 
     struct String to_return;
     create_string(&to_return);
 
-    int i;
+    uint32_t i;
     for (i = index; i < len; i++) {
 
         if (is_valid_char(execution_line[i], i - index) == shell_io_success) {
@@ -96,7 +96,7 @@ static int handle_variable_declaration(char *execution_line, struct String *fina
         }
     }
 
-    int offset = i - index;
+    uint32_t offset = i - index;
     char *variable_name;
     trim_to_actual_size(&to_return);
     get_char_pointer(&to_return, &variable_name);
@@ -117,8 +117,8 @@ static int handle_variable_declaration(char *execution_line, struct String *fina
 ShellIOState substitute_variables(char **line){
 
     //get length and the string
-    int len = strlen(*line);
-    int temp_length;
+    uint32_t len = strlen(*line);
+    uint32_t temp_length;
 
     //create string to be manipulated and returned.
     struct String to_return;
@@ -126,7 +126,7 @@ ShellIOState substitute_variables(char **line){
 
     char *current_line = *line;
 
-    for (int i = 0; i < len; i++) {
+    for (uint32_t i = 0; i < len; i++) {
         switch (current_line[i]) {
 
             case '$':
